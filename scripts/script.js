@@ -2,7 +2,29 @@ let continuar = 1
 let valor = 0
 function correrAlerta (){
     while(continuar == 1){
-        let eleccion = prompt("¿Que divisas desea calcular? \n\n 1. Pesos colombianos a Dolares \n 2. Dolares a pesos colombianos \n 3. Dolares a Euros \n 4. Euros a Dolares ")
+        const options = [
+            {
+                from: 'Pesos colombianos',
+                to: 'Dolares'
+            },
+            {
+                from: 'Dolares',
+                to: 'Pesos colombianos'
+            },
+            {
+                from: 'Dolares',
+                to: 'Euros'
+            },
+            {
+                from: 'Euros',
+                to: 'Dolares'
+            },
+        ]
+        
+        const menu = options.map(function(objeto,index){
+            return `${index+1}. Cambio de ${objeto.from} a ${objeto.to}: `;
+        }).join('\n')
+        let eleccion = prompt(menu + '\n5. Salir')
         switch(eleccion){
             case "1":
                 valor = prompt("Ingrese la cantidad de Pesos colombianos que desea calcular: ")
@@ -48,6 +70,10 @@ function correrAlerta (){
                     alert("Lo siento, has ingresado un numero no valido :(")
                 break;
                 }
+                case "5":
+                alert("Gracias por usar nuestros sercivios, vuelva pronto")
+                continuar = 0
+                break;  
             default:
                 alert("No has elegido un valor valido, vuelve a intentarlo")
         }
