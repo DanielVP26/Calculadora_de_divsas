@@ -20,11 +20,10 @@ function correrAlerta (){
                 to: 'Dolares'
             },
         ]
-        
         const menu = options.map(function(objeto,index){
             return `${index+1}. Cambio de ${objeto.from} a ${objeto.to}: `;
         }).join('\n')
-        let eleccion = prompt(menu + '\n5. Salir')
+        let eleccion = prompt(`${menu} \n5. Salir`)
         switch(eleccion){
             case "1":
                 valor = prompt("Ingrese la cantidad de Pesos colombianos que desea calcular: ")
