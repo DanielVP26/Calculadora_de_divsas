@@ -41,6 +41,14 @@ btnDelete.onclick = () => {
     botonesFavoritos.innerHTML = ''
     btnDelete.style.display = 'none'
     favoriteitem.checked = false
+    Toastify({
+        text: "Se han eliminado todos los favoritos",
+        duration: 2000,
+        gravity: 'bottom',
+        style: {
+            background: "linear-gradient(to right, #990f02, #e3242b)",
+        },
+    }).showToast();
 }
 
 const favoritosArray = JSON.parse(localStorage.getItem('favoritos') ?? '[]')
@@ -66,15 +74,21 @@ favoriteitem.onchange = () => {
                 valor2: select2.value
             }
             if (favoritosArray.length < 3 && !existe()) {
-                console.log('pushea botones')
                 favoritosArray.push(objTmp)
                 localStorage.setItem('favoritos', JSON.stringify(favoritosArray))
                 crearBoton(objTmp)
                 btnDelete.style.display = ''
             } else if (favoritosArray.length >= 3) {
-                // en caso de tener 3 mensaje
-            } else {
-                //en caso de existir mensajito
+                Toastify({
+                    text: "No puedes tener más de 3 elementos",
+                    duration: 2000,
+                    close: true,
+                    style: {
+                        background: "linear-gradient(to right, #ffff00, #ffff81)",
+                        color: 'black'
+                    },
+                }).showToast();
+                favoriteitem.checked = false
             }
         } else {
             //si le quitan el favorito
@@ -101,12 +115,12 @@ function crearBoton(element) {
         select1.value = element.valor1
         select2.value = element.valor2
         favoriteitem.checked = true
+        inputMoneda.onkeyup()
     }
     botonesFavoritos.appendChild(btn)
 }
 
 function crearBotones() {
-    console.log('crearBotones')
     if (favoritosArray.length != 0) {
         favoritosArray.forEach(element => {
             crearBoton(element)
