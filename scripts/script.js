@@ -100,6 +100,7 @@ function crearBoton(element) {
     btn.onclick = () => {
         select1.value = element.valor1
         select2.value = element.valor2
+        favoriteitem.checked = true
     }
     botonesFavoritos.appendChild(btn)
 }
