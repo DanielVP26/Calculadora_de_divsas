@@ -3,6 +3,10 @@
   transition: all 0.3s ease-in-out;
 }
 
+.btnArrow[aria-expanded=false] > img {
+  transition: all 0.3s ease-in-out;
+}
+
 svg {
   cursor: pointer;
   overflow: visible;
