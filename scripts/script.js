@@ -80,7 +80,7 @@ favoriteitem.onchange = () => {
                 btnDelete.style.display = ''
             } else if (favoritosArray.length >= 3) {
                 Toastify({
-                    text: "No puedes tener más de 3 elementos",
+                    text: "No puedes tener más de 3 favoritos",
                     duration: 2000,
                     close: true,
                     style: {
