@@ -1,3 +1,8 @@
+.btnArrow[aria-expanded=true] > img {
+  transform: rotate(90deg);
+  transition: all 0.3s ease-in-out;
+}
+
 svg {
   cursor: pointer;
   overflow: visible;
