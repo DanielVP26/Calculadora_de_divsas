@@ -1,13 +1,27 @@
-const factorCambio = {
-    USDCOP: 4988.83,
-    USDEUR: 0.97,
-    USDUSD: 1,
-    EURCOP: 5161.19,
-    EURUSD: 1.03,
-    EUREUR: 1,
-    COPUSD: 0.00020,
-    COPEUR: 0.00019,
-    COPCOP: 1,
+let apiData
+
+fetch("./scripts/TASAS.json")
+    .then(response => response.json())
+    .then(response => {
+        apiData = response
+        crearSelect()
+    })
+
+
+function crearSelect() {
+    const optionElement = document.createElement('option')
+    const apiDataKeys = Object.keys(apiData)
+    apiDataKeys.forEach((element) => {
+        select1.appendChild(createOption(element))
+        select2.appendChild(createOption(element))
+    })
+}
+
+function createOption(text) {
+    const option = document.createElement("option");
+    option.setAttribute("value", text);
+    option.innerText = text
+    return option;
 }
 
 function esValido() {
@@ -21,6 +35,17 @@ function selectChange() {
     }
 }
 
+function procedimientos() {
+    let resultado
+    if (select1.value == "USD") {
+        resultado = inputMoneda.value * apiData[select2.value]
+    } else {
+        const resultadotemp = inputMoneda.value / apiData[select1.value]
+        resultado = resultadotemp * apiData[select2.value]
+    }
+    conversion.innerText = Intl.NumberFormat('es-MX').format(resultado)
+}
+
 select1.onchange = selectChange
 select2.onchange = selectChange
 
@@ -29,8 +54,7 @@ inputMoneda.onkeyup = () => {
         if (isNaN(inputMoneda.value)) {
             conversion.innerText = 'No has ingresado un valor valido'
         } else {
-            const resultado = inputMoneda.value * factorCambio[`${select1.value}${select2.value}`]
-            conversion.innerText = Intl.NumberFormat('es-MX').format(resultado)
+            procedimientos()
         }
     }
 }
@@ -130,3 +154,5 @@ function crearBotones() {
 }
 
 window.onload = crearBotones
+
+
